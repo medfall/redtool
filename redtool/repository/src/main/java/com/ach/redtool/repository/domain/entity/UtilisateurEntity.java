@@ -1,4 +1,4 @@
-package com.ach.redtool.repository.entity;
+package com.ach.redtool.repository.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,16 +15,13 @@ public class UtilisateurEntity {
 	private String nom;
 	@Column(name ="PRENOM")
 	private String prenom;
+	@Column(name ="EMAIL")
+	private String email;
 	
 	
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	
-	
 	public String getNom() {
 		return nom;
 	}
@@ -37,6 +34,12 @@ public class UtilisateurEntity {
 	}
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 

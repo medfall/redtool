@@ -12,13 +12,15 @@
 <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </head>
 <body>
-
  <div class="container">
   <div class="col-md-offset-1 col-md-10">
    <h2>RedTool2 - Red Tool WebApp Poc</h2>
    <hr />
+   
+   <h2><c:out value="${req.contextPath}" /></h2>
+
    <input type="button" value="Add User"
-    onclick="window.location.href='user/showUserForm'; return false;"
+    onclick="window.location.href='showUserForm'; return false;"
     class="btn btn-primary" />
     <br/><br/>
    <div class="panel panel-info">
@@ -28,14 +30,15 @@
     <div class="panel-body">
      <table class="table table-striped table-bordered">
       <tr>
-       <th>First Name</th>
-       <th>Last Name</th>
-       <th>Id</th>
+       <th>Nom</th>
+       <th>Prenom</th>
+       <th>Email</th>
        <th>Action</th>
       </tr>
 
-      <!-- loop over and print our customers -->
+      <!-- loop over and print users -->
       <c:forEach var="tempUser" items="${listUsers}">
+
 
        <!-- construct an "update" link with customer id -->
        <c:url var="updateLink" value="user/updateUser">

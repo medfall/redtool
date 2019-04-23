@@ -3,7 +3,7 @@ package com.ach.redtool.service.converter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
-import com.ach.redtool.repository.entity.UtilisateurEntity;
+import com.ach.redtool.repository.domain.entity.UtilisateurEntity;
 import com.ach.redtool.service.common.Converter;
 import com.ach.redtool.service.dto.UtilisateurDto;;
 
@@ -21,7 +21,7 @@ public class UtilisateurConverter implements Converter<UtilisateurEntity, Utilis
 	@Override
 	public UtilisateurEntity convertToEntity(UtilisateurDto dto) {
 		UtilisateurEntity utilisateurEntity = new UtilisateurEntity();
-	    BeanUtils.copyProperties(dto, utilisateurEntity);
+	    BeanUtils.copyProperties(dto, utilisateurEntity,"id");
 	    return utilisateurEntity;
 	}
 

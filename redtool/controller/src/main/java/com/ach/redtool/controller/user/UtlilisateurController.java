@@ -2,21 +2,18 @@ package com.ach.redtool.controller.user;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ach.redtool.service.common.ResponseDto;
 import com.ach.redtool.service.dto.UtilisateurDto;
 import com.ach.redtool.service.user.UserService;
 
@@ -24,8 +21,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 
-@RestController
-@RequestMapping("/rest/user")
+@Controller
+@RequestMapping("/user")
 @Api(value="User controller")
 public class UtlilisateurController {
 	
@@ -34,52 +31,61 @@ public class UtlilisateurController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping(value="/listUsers",produces="application/json")
+	@GetMapping(value="/listUsers")
 	@ApiOperation("get All Users")
-	public ResponseEntity <List<UtilisateurDto>> getAllUser() {
+	public String  getAllUser(Model theModel) {
 		LOOGER.debug("Recupérer la liste des utilisateur");
-		List<UtilisateurDto> listUser =  userService.findAllUser();
-		if(listUser.isEmpty()) {
+		List<UtilisateurDto> listUsers =  userService.findAllUser();
+		if(listUsers.isEmpty()) {
 			LOOGER.debug("la liste est vide");
-			return ResponseEntity.noContent().build();
 		}
-		LOOGER.debug("nombre d'utilisateurs trouvés {}",listUser.size());
-
-		return ResponseEntity.ok().body(listUser);
+		LOOGER.debug("nombre d'utilisateurs trouvés {}",listUsers.size());
+		theModel.addAttribute("listUsers", listUsers);
+		return "list-users";
 	}
 	
-	@GetMapping(value="/getUser/{id}",produces="application/json")
+	@GetMapping(value="/getUser")
 	@ApiOperation("get user by id")
-	public ResponseEntity<UtilisateurDto> getUserById(@PathVariable(value ="id") Long userId)  {
+	public String getUserById(@RequestParam("userId") Long userId,Model theModel)  {
 		LOOGER.debug("Recupérer l'utilisateur dont l'id = {}",userId);
 		UtilisateurDto UtilisateurDto = userService.getUserById(userId);
-		if(UtilisateurDto == null)
-			 ResponseEntity.notFound().build();
-		return ResponseEntity.ok().body(UtilisateurDto);
+		theModel.addAttribute("user", UtilisateurDto);
+		return "user-Form";
+	}
+	
+	@GetMapping(value="showUserForm")
+	@ApiOperation("show user form")
+	public String showUserForm(Model theModel)  {
+		LOOGER.debug("afficher form utilisateur ");
+		UtilisateurDto utilisateurDto = new UtilisateurDto();
+		theModel.addAttribute("user", utilisateurDto);
+		return "user-form";
 	}
 	
 	
 	@PostMapping("/createUser")
 	@ApiOperation("create user")
-	public UtilisateurDto createUser(@Valid @RequestBody UtilisateurDto utilisateurDto) {
+	public String createUser(@ModelAttribute("utilisateur") UtilisateurDto utilisateurDto ) {
 		LOOGER.debug("création d'un utilisateur ");
-		return userService.createUser((utilisateurDto));
+		 userService.createUser((utilisateurDto));
+		 return "redirect:/user/listUsers";
 	}
 
 	
-	@GetMapping(value="/deleteUser/{id}",produces="application/json")
+	@GetMapping(value="/deleteUser/{id}")
 	@ApiOperation("delete user")
-	public ResponseDto deleteUser(@PathVariable(value ="id") Long userId) {
+	public String deleteUser(@RequestParam("UserId") Long userId) {
 		LOOGER.debug("delete user id = {}",userId);
-		return userService.deleteUser(userId);
+		userService.deleteUser(userId);
+		return "redirect:/user/listUsers";
 	}
 	
-	@PutMapping(value="/updateUser",produces="application/json")
+	@PutMapping(value="/updateUser")
 	@ApiOperation("update user")
-	public ResponseEntity<ResponseDto> updateUser(@Valid @RequestBody UtilisateurDto utilisateurDto)  {
-		LOOGER.debug("Recupérer l'utilisateur dont l'id = {}",utilisateurDto.getId());
-		ResponseDto responseDto = userService.updateUser(utilisateurDto);
-		return ResponseEntity.ok().body(responseDto);
+	public String updateUser( @ModelAttribute("utilisateur") UtilisateurDto utilisateurDto)  {
+		LOOGER.debug("update de l'utilisateur dont l'id = {}",utilisateurDto.getId());
+		userService.updateUser(utilisateurDto);
+		return "redirect:/user/listUsers";
 	}
 
 }

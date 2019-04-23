@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ach.redtool.repository.entity.UtilisateurEntity;
+import com.ach.redtool.repository.domain.entity.UtilisateurEntity;
 import com.ach.redtool.repository.user.UtilisateurRepository;
 import com.ach.redtool.service.common.MessageDto;
 import com.ach.redtool.service.common.ResponseDto;

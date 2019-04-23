@@ -5,6 +5,7 @@ public class UtilisateurDto {
 	private Long id;
 	private String nom;
 	private String prenom;
+	private String email;
 	
 	public Long getId() {
 		return id;
@@ -23,6 +24,12 @@ public class UtilisateurDto {
 	}
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

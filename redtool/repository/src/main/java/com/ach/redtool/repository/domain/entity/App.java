@@ -1,4 +1,4 @@
-package com.ach.redtool.repository.entity;
+package com.ach.redtool.repository.domain.entity;
 
 /**
  * Hello world!
