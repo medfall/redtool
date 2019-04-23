@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faceted-project>
+<<<<<<< HEAD
+=======
+  <runtime name="Apache Tomcat v9.0"/>
+>>>>>>> branch 'master' of https://github.com/medfall/redtool.git
   <installed facet="java" version="1.8"/>
   <installed facet="jst.utility" version="1.0"/>
 </faceted-project>
