@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,9 +73,9 @@ public class UtlilisateurController {
 	}
 
 	
-	@GetMapping(value="/deleteUser/{id}")
+	@DeleteMapping(value="/deleteUser")
 	@ApiOperation("delete user")
-	public String deleteUser(@RequestParam("UserId") Long userId) {
+	public String deleteUser(@RequestParam("userId") Long userId) {
 		LOOGER.debug("delete user id = {}",userId);
 		userService.deleteUser(userId);
 		return "redirect:/user/listUsers";
@@ -82,8 +83,8 @@ public class UtlilisateurController {
 	
 	@PutMapping(value="/updateUser")
 	@ApiOperation("update user")
-	public String updateUser( @ModelAttribute("utilisateur") UtilisateurDto utilisateurDto)  {
-		LOOGER.debug("update de l'utilisateur dont l'id = {}",utilisateurDto.getId());
+	public String updateUser(@RequestParam("userId") Long userId, @ModelAttribute("utilisateur") UtilisateurDto utilisateurDto)  {
+		LOOGER.debug("update de l'utilisateur dont l'id = {}",userId);
 		userService.updateUser(utilisateurDto);
 		return "redirect:/user/listUsers";
 	}
