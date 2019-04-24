@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ach.redtool.service.dto.UtilisateurDto;
+import com.ach.redtool.service.exception.ResourceNotFoundException;
 import com.ach.redtool.service.user.UserService;
 
 import io.swagger.annotations.Api;
@@ -45,13 +46,13 @@ public class UtlilisateurController {
 		return "list-users";
 	}
 	
-	@GetMapping(value="/getUser")
+	@GetMapping(value="/showFormForUpdate")
 	@ApiOperation("get user by id")
 	public String getUserById(@RequestParam("userId") Long userId,Model theModel)  {
 		LOOGER.debug("Recupérer l'utilisateur dont l'id = {}",userId);
 		UtilisateurDto UtilisateurDto = userService.getUserById(userId);
 		theModel.addAttribute("user", UtilisateurDto);
-		return "user-Form";
+		return "user-form";
 	}
 	
 	@GetMapping(value="showUserForm")
@@ -73,20 +74,20 @@ public class UtlilisateurController {
 	}
 
 	
-	@DeleteMapping(value="/deleteUser")
+	@GetMapping(value="/deleteUser")
 	@ApiOperation("delete user")
-	public String deleteUser(@RequestParam("userId") Long userId) {
+	public String deleteUser(@RequestParam("userId") Long userId) throws ResourceNotFoundException {
 		LOOGER.debug("delete user id = {}",userId);
 		userService.deleteUser(userId);
 		return "redirect:/user/listUsers";
 	}
 	
-	@PutMapping(value="/updateUser")
+	@GetMapping(value="/updateUser")
 	@ApiOperation("update user")
-	public String updateUser(@RequestParam("userId") Long userId, @ModelAttribute("utilisateur") UtilisateurDto utilisateurDto)  {
+	public String updateUser(@RequestParam("userId") Long userId, @ModelAttribute("utilisateur") UtilisateurDto utilisateurDto) throws ResourceNotFoundException {
 		LOOGER.debug("update de l'utilisateur dont l'id = {}",userId);
 		userService.updateUser(utilisateurDto);
 		return "redirect:/user/listUsers";
 	}
-
+	
 }

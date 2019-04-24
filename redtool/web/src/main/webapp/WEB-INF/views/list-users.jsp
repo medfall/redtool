@@ -38,7 +38,7 @@
 
 
        <!-- construct an "update" link with customer id -->
-       <c:url var="updateLink" value="updateUser">
+       <c:url var="updateLink" value="showFormForUpdate">
          <c:param name="userId" value="${tempUser.id}" />
        </c:url>
 
