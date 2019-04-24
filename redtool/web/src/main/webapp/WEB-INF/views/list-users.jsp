@@ -16,9 +16,6 @@
   <div class="col-md-offset-1 col-md-10">
    <h2>RedTool2 - Red Tool WebApp Poc</h2>
    <hr />
-   
-   <h2><c:out value="${req.contextPath}" /></h2>
-
    <input type="button" value="Add User"
     onclick="window.location.href='showUserForm'; return false;"
     class="btn btn-primary" />
@@ -41,12 +38,12 @@
 
 
        <!-- construct an "update" link with customer id -->
-       <c:url var="updateLink" value="user/updateUser">
+       <c:url var="updateLink" value="updateUser">
          <c:param name="userId" value="${tempUser.id}" />
        </c:url>
 
        <!-- construct an "delete" link with customer id -->
-       <c:url var="deleteLink" value="user/deleteUser">
+       <c:url var="deleteLink" value="deleteUser">
         <c:param name="userId" value="${tempUser.id}" />
        </c:url>
 
