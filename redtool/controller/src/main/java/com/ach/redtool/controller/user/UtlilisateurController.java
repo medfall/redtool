@@ -48,7 +48,7 @@ public class UtlilisateurController {
 	
 	@GetMapping(value="/showFormForUpdate")
 	@ApiOperation("get user by id")
-	public String getUserById(@RequestParam("userId") Long userId,Model theModel)  {
+	public String getUserById(@RequestParam("userId") Long userId,Model theModel) throws ResourceNotFoundException  {
 		LOOGER.debug("Recupérer l'utilisateur dont l'id = {}",userId);
 		UtilisateurDto UtilisateurDto = userService.getUserById(userId);
 		theModel.addAttribute("user", UtilisateurDto);

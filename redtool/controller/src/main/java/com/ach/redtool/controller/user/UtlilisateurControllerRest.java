@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ach.redtool.service.common.ResponseDto;
 import com.ach.redtool.service.dto.UtilisateurDto;
+import com.ach.redtool.service.exception.ResourceNotFoundException;
 import com.ach.redtool.service.user.UserService;
 
 import io.swagger.annotations.Api;
@@ -50,7 +51,7 @@ public class UtlilisateurControllerRest {
 	
 	@GetMapping(value="/getUser/{id}",produces="application/json")
 	@ApiOperation("get user by id")
-	public ResponseEntity<UtilisateurDto> getUserById(@PathVariable(value ="id") Long userId)  {
+	public ResponseEntity<UtilisateurDto> getUserById(@PathVariable(value ="id") Long userId) throws ResourceNotFoundException  {
 		LOOGER.debug("Recupérer l'utilisateur dont l'id = {}",userId);
 		UtilisateurDto UtilisateurDto = userService.getUserById(userId);
 		if(UtilisateurDto == null)
@@ -63,7 +64,7 @@ public class UtlilisateurControllerRest {
 	@ApiOperation("create user")
 	public UtilisateurDto createUser(@Valid @RequestBody UtilisateurDto utilisateurDto) {
 		LOOGER.debug("création d'un utilisateur ");
-		return userService.createUser((utilisateurDto));
+		return null;
 	}
 
 	
