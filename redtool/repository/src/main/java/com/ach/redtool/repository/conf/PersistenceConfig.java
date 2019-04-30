@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages ="com.ach.redtool.repository.*")
 @EntityScan("com.ach.redtool.repository.domain.*")
 @EnableJpaRepositories(basePackages="com.ach.redtool.repository.*")
-@PropertySource("classpath:application.properties")
-public class HibernateConfig {
+@PropertySource("classpath:persistence.properties")
+public class PersistenceConfig {
 	
 }

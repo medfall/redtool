@@ -5,10 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
 @EnableWebMvc
+@PropertySource("classpath:application.properties")
 @ComponentScan({"com.ach.redtool.controller.*","com.ach.redtool.service.*","com.ach.redtool.repository.*"})
 public class ControllerApplication extends SpringBootServletInitializer  {
 
@@ -20,5 +22,4 @@ public class ControllerApplication extends SpringBootServletInitializer  {
 	    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 	        return builder.sources(ControllerApplication.class);
 	    }
-
 }
