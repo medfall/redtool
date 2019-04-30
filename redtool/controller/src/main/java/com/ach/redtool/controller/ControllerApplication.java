@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
 @EnableWebMvc
-//@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @EnableJpaRepositories(basePackages="com.ach.redtool.repository.*")
 @ComponentScan({"com.ach.redtool.controller.*","com.ach.redtool.service.*","com.ach.redtool.repository.*"})
 public class ControllerApplication extends SpringBootServletInitializer  {
