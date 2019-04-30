@@ -1,4 +1,4 @@
-package com.ach.redtool.controller.conf.mvc;
+package com.ach.redtool.repository.conf;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
