@@ -50,7 +50,7 @@ public class UtlilisateurController {
 		LOOGER.debug("Recupérer l'utilisateur dont l'id = {}",userId);
 		UtilisateurDto UtilisateurDto = userService.getUserById(userId);
 		theModel.addAttribute("user", UtilisateurDto);
-		return "user-form";
+		return "update-user-form";
 	}
 	
 	@GetMapping(value="showUserForm")
@@ -80,10 +80,10 @@ public class UtlilisateurController {
 		return "redirect:/user/listUsers";
 	}
 	
-	@GetMapping(value="/updateUser")
+	@PostMapping(value="/updateUser")
 	@ApiOperation("update user")
-	public String updateUser(@RequestParam("userId") Long userId, @ModelAttribute("utilisateur") UtilisateurDto utilisateurDto) throws ResourceNotFoundException {
-		LOOGER.debug("update de l'utilisateur dont l'id = {}",userId);
+	public String updateUser(@ModelAttribute("utilisateur") UtilisateurDto utilisateurDto) throws ResourceNotFoundException {
+		LOOGER.debug("update de l'utilisateur dont l'id = {}",utilisateurDto.getId());
 		userService.updateUser(utilisateurDto);
 		return "redirect:/user/listUsers";
 	}

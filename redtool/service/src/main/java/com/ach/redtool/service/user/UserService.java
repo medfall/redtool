@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ach.redtool.service.common.ResponseDto;
 import com.ach.redtool.service.dto.UtilisateurDto;
+import com.ach.redtool.service.exception.ResourceNotFoundException;
 
 
 public interface UserService {
@@ -12,7 +13,7 @@ public interface UserService {
 	 UtilisateurDto getUserById(Long id);
 	 UtilisateurDto createUser(UtilisateurDto dto);
 	 public  ResponseDto deleteUser(Long id);
-	 ResponseDto updateUser(UtilisateurDto utilisateurDto);
+	 ResponseDto updateUser(UtilisateurDto utilisateurDto) throws ResourceNotFoundException;
 	 
 	
 }

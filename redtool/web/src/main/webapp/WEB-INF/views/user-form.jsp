@@ -25,7 +25,7 @@
 					<form:form action="createUser" cssClass="form-horizontal"
 						method="post" modelAttribute="user">
 
-						<!-- need to associate this data with customer id -->
+						<!-- need to associate this data with user id -->
 						<form:hidden path="id" />
 
 						<div class="form-group">

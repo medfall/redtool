@@ -13,6 +13,7 @@ import com.ach.redtool.service.common.MessageDto;
 import com.ach.redtool.service.common.ResponseDto;
 import com.ach.redtool.service.converter.UtilisateurConverter;
 import com.ach.redtool.service.dto.UtilisateurDto;
+import com.ach.redtool.service.exception.ResourceNotFoundException;
 
 
 
@@ -24,6 +25,7 @@ public class  UserServiceImpl  implements UserService {
 	
 	@Autowired
 	UtilisateurConverter utilisateurConverter;
+	
 
 	@Override
 	public List<UtilisateurDto> findAllUser () {
@@ -41,23 +43,22 @@ public class  UserServiceImpl  implements UserService {
 
 	@Override
 	public UtilisateurDto createUser(UtilisateurDto utilisateurDto) {
-		UtilisateurEntity utilisateurEntity = utilisateurConverter.convertToEntity(utilisateurDto);
+		UtilisateurEntity utilisateurEntity = new UtilisateurEntity();
+	    utilisateurEntity = utilisateurConverter.convertToEntity(utilisateurDto,utilisateurEntity);
 		utilisateurEntity= userRepository.save(utilisateurEntity);
 		return  utilisateurConverter.convertToDTO(utilisateurEntity);
 	}
 	
 	@Override
-	public ResponseDto updateUser(UtilisateurDto utilisateurDto) {
+	public ResponseDto updateUser(UtilisateurDto utilisateurDto) throws ResourceNotFoundException {
 		
 		ResponseDto response = new ResponseDto();
-		Optional<UtilisateurEntity> utilisateurEntity = userRepository.findById(utilisateurDto.getId());
-		if(utilisateurEntity.isPresent()) {
-		    UtilisateurEntity user = utilisateurConverter.convertToEntity(utilisateurDto);
-			userRepository.save(user);
-			response.addMessage(new MessageDto("vos modifications ont été enregistrées succées"));
-			return response;
-		}
-	    response.addMessage(new MessageDto("un probleme est survenu lors de la modification"));
+		UtilisateurEntity utilisateurEntity = userRepository.findById(utilisateurDto.getId())
+				.orElseThrow(()-> new ResourceNotFoundException("User not found"));
+		
+		utilisateurEntity = utilisateurConverter.convertToEntity(utilisateurDto,utilisateurEntity);
+		userRepository.save(utilisateurEntity);
+		response.addMessage(new MessageDto("vos modifications ont été enregistrées succées"));
 		return response;
 	}
 	

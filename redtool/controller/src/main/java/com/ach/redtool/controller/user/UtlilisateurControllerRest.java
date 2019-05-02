@@ -77,7 +77,7 @@ public class UtlilisateurControllerRest {
 	
 	@PutMapping(value="/updateUser",produces="application/json")
 	@ApiOperation("update user")
-	public ResponseEntity<ResponseDto> updateUser(@Valid @RequestBody UtilisateurDto utilisateurDto)  {
+	public ResponseEntity<ResponseDto> updateUser(@Valid @RequestBody UtilisateurDto utilisateurDto) throws ResourceNotFoundException  {
 		LOOGER.debug("Recupérer l'utilisateur dont l'id = {}",utilisateurDto.getId());
 		ResponseDto responseDto = userService.updateUser(utilisateurDto);
 		return ResponseEntity.ok().body(responseDto);

@@ -4,6 +4,6 @@ public interface Converter<E,D>  {
 
 	public D convertToDTO(final E entity) ;
 	
-	public E convertToEntity(final D dto);
+	public E convertToEntity(final D dto,final E entity);
 	
 }
