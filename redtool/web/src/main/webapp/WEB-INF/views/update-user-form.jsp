@@ -19,15 +19,13 @@
 			<h2 class="text-center">RedTool2 - Red Tool WebApp Poc</h2>
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<div class="panel-title">Add User</div>
+					<div class="panel-title">Update User</div>
 				</div>
 				<div class="panel-body">
 					<form:form action="updateUser" cssClass="form-horizontal"
 						method="post" modelAttribute="user">
-
-						<!-- need to associate this data with customer id -->
+						<!-- need to associate this data with User id -->
 						<form:hidden path="id" />
-
 						<div class="form-group">
 							<label for="nom" class="col-md-3 control-label">Nom
 								</label>

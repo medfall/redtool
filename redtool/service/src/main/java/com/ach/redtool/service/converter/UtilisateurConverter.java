@@ -19,8 +19,7 @@ public class UtilisateurConverter implements Converter<UtilisateurEntity, Utilis
 	}
 
 	@Override
-	public UtilisateurEntity convertToEntity(UtilisateurDto dto) {
-		UtilisateurEntity utilisateurEntity = new UtilisateurEntity();
+	public UtilisateurEntity convertToEntity(UtilisateurDto dto,UtilisateurEntity utilisateurEntity) {
 	    BeanUtils.copyProperties(dto, utilisateurEntity,"id");
 	    return utilisateurEntity;
 	}
