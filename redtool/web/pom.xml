@@ -47,6 +47,14 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- JSP Dependency -->
+
+		<!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.4.0</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>web</finalName>

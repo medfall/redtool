@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ach.redtool.repository.domain.entity.UtilisateurEntity;
@@ -73,6 +75,15 @@ public class  UserServiceImpl  implements UserService {
 		}
 	    response.addMessage(new MessageDto("l'utilisateur n'existe pas"));
 		return response;
+	}
+
+	@Override
+	public List<UtilisateurDto> findAllUserByPage(Pageable page) {
+		// TODO Auto-generated method stub
+		Page<UtilisateurEntity> resultTmp = userRepository.findAll(page);
+		List<UtilisateurDto> result = resultTmp.stream().map(utilisateurConverter::convertToDTO).collect(Collectors.toList());
+		
+		return result;
 	}
 
 }

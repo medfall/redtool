@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity(name="user")
-public class UtilisateurEntity {
+@Entity(name="user2")
+public class UtilisateurEntity2 {
 	@Id
 	@GeneratedValue
 	@Column(name="id")

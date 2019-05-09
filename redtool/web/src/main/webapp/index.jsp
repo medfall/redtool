@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
- pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+ pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -10,13 +10,36 @@
  rel="stylesheet">
 <script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<script src="<c:url value="/resources/js/jquery.bootpag.min.js" />"></script>
 </head>
 <body>
-
+<div id="content">Dynamic Content goes here</div>
+<div id="page-selection">Pagination goes here</div>
+<script>
+$('#page-selection').bootpag({
+    total: 50,
+    page: 2,
+    maxVisible: 5,
+    leaps: true,
+    firstLastUse: true,
+    first: '←',
+    last: '→',
+    wrapClass: 'pagination',
+    activeClass: 'active',
+    disabledClass: 'disabled',
+    nextClass: 'next',
+    prevClass: 'prev',
+    lastClass: 'last',
+    firstClass: 'first'
+}).on("page", function(event, num){
+    $(".content4").html("Page " + num); // or some ajax content loading...
+}); 
+</script>
  <div class="container">
   <div class="col-md-offset-1 col-md-10">
    <h2>RedTool2 - Red Tool WebApp Poc</h2>
    <hr />
+   
    <input type="button" value="Add User"
     onclick="window.location.href='user/showUserForm'; return false;"
     class="btn btn-primary" />

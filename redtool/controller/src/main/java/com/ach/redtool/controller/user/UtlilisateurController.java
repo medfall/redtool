@@ -5,6 +5,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +38,20 @@ public class UtlilisateurController {
 	public String  getAllUser(Model theModel) {
 		LOOGER.debug("Recupérer la liste des utilisateur");
 		List<UtilisateurDto> listUsers =  userService.findAllUser();
+		if(listUsers.isEmpty()) {
+			LOOGER.debug("la liste est vide");
+		}
+		LOOGER.debug("nombre d'utilisateurs trouvés {}",listUsers.size());
+		theModel.addAttribute("listUsers", listUsers);
+		return "list-users";
+	}
+	
+	@GetMapping(value="/listUsersByPage")
+	@ApiOperation("get All Users by page")
+	public String  getAllUserByPage(Model theModel) {
+		LOOGER.debug("Recupérer la liste des utilisateur");
+		Pageable pageable = PageRequest.of(0, 1);
+		List<UtilisateurDto> listUsers =  userService.findAllUserByPage(pageable);
 		if(listUsers.isEmpty()) {
 			LOOGER.debug("la liste est vide");
 		}
